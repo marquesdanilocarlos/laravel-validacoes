@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Course;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CourseRequest extends FormRequest
@@ -25,11 +26,7 @@ class CourseRequest extends FormRequest
             'course' => [
                 'required',
                 'max:100',
-                function ($name, $value, $fail) {
-                    if ($value === 'PHP') {
-                        $fail("O campo {$name} não pode possuir o valor {$value}");
-                    }
-                }
+                new Course()
             ],
             'workload' => ['required', 'integer']
         ];
