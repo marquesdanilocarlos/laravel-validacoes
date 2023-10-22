@@ -8,10 +8,22 @@
     <title>Document</title>
 </head>
 <body>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form action="{{route('store')}}" method="POST">
     @csrf
     <label for="course">Curso:</label>
-    <input type="text" name="course" id="course">
+    <input type="text" name="course" id="course" value="{{old('course')}}">
+
+    <label for="workload">Carga horária:</label>
+    <input type="text" name="workload" id="workload" value="{{old('workload')}}">
 
     <button>Enviar</button>
 </form>
