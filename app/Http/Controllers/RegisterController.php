@@ -22,4 +22,20 @@ class RegisterController extends Controller
         dump('Validou!');
         dump($request->all());
     }
+
+    public function apiStore(Request $request)
+    {
+        $data = $request->all();
+        $validation = Validator::make($data, [
+            'course' => ['required', 'max:100'],
+            'workload' => ['required', 'integer']
+        ]);
+
+        if($validation->fails()){
+            $errors = $validation->errors();
+            return $errors->all();
+        }
+
+        return 'Validou!';
+    }
 }
