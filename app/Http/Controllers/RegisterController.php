@@ -9,18 +9,20 @@ class RegisterController extends Controller
 {
     public function store(Request $request)
     {
-        $data = $request->except('_token');
 
-        $validation = Validator::make(
-            $data,
-        [
+        $request->validate([
             'course' => ['required', 'max:100'],
             'workload' => ['required', 'integer']
         ]);
 
-        if ($validation->fails()) {
-            return redirect()->back()->withInput()->withErrors($validation);
-        }
+        //$data = $request->except('_token');
+
+        /*Validator::make(
+            $data,
+        [
+            'course' => ['required', 'max:100'],
+            'workload' => ['required', 'integer']
+        ])->validate();*/
 
         dd('Validou!');
     }
